@@ -11,7 +11,10 @@ export class AppComponent {
   constructor(private translator: YandexTranslateService){}
 
   @Output()
-  translate(text){
-    this.translator.translate(text).subscribe(res => console.log(res.text));
+  translate(text: string){
+    //console.log(text);
+    let box = document.getElementById("output-box");
+    //console.info(box.textContent, box.innerText);
+    this.translator.translate(text).subscribe(res => box.setAttribute('placeholder',res.text));
   }
 }

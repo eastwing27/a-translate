@@ -8,11 +8,18 @@ export class TextAreaComponent
 {
     @Input() disabled: string;
     @Input() placeholder: string;
-    @Input() onKeyUp;
+    @Input() areaId: string;
+    @Input() onTextInput: (text: string) => any;
 
     userText: string;
 
     constructor(){
         this.userText = '';
+    }
+
+    private onTextChanged(){
+        if (!!this.onTextInput){
+            this.onTextInput(this.userText);
+        }
     }
 }

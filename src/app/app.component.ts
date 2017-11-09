@@ -7,14 +7,19 @@ import { YandexTranslateService } from './services/yt.service';
 })
 export class AppComponent {
   title = 'app';
+  langs = [];
 
-  constructor(private translator: YandexTranslateService){}
+  constructor(private translator: YandexTranslateService){
+    this.translator.getLanguages().subscribe(res => {
+      this.langs = res.langs;
+    });
+  }
 
   @Output()
   translate(text: string){
     //console.log(text);
     let box = document.getElementById("output-box");
     //console.info(box.textContent, box.innerText);
-    this.translator.translate(text).subscribe(res => box.setAttribute('placeholder',res.text));
+    this.translator.getTranslation(text).subscribe(res => box.setAttribute('placeholder',res.text));
   }
 }

@@ -1,18 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
 import { YandexTranslateService } from './services/yt.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TextAreaComponent } from './components/textarea/textarea.component';
-import { HttpModule } from '@angular/http';
+import { DropdownComponent } from './components/ddown/ddown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TextAreaComponent
+    TextAreaComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

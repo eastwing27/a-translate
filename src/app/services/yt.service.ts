@@ -11,12 +11,33 @@ export class YandexTranslateService{
         
     }
 
-    private makeUrl(text: string){
-        return `${this.endpoint}/translate?key=${this.key}&text=${text}&lang=ru`
+    private flatten(arr: any[]){
+        if (!arr || arr.length == 0)
+            return '';
+
+        let flat = arr
+            .map(item => item.key + '=' + item.value)
+            .join('&');
+        return '&' + flat;
     }
 
-    translate(text: string){
-        return this.http.get(this.makeUrl(text))
-            .map(res => res.json());
+    private makeUrl(route: string, options = []){
+        var res = `${this.endpoint}/${route}?key=${this.key}` + this.flatten(options);
+        return res;
+    }
+
+    getTranslation(text: string){
+        var options = [];
+        options.push({key: "text", value: text});
+        options.push({key: "lang", value: "ru"});
+
+        let url = this.makeUrl('translate', options);
+
+        return this.http.get(url).map(res => res.json());
+    }
+    
+    getLanguages(lang: string = 'en'){
+        return this.http.get(this.makeUrl('getLangs', [{key: 'ui', value: lang}]))    
+            .map(res => res.json());    
     }
 }

@@ -1,18 +1,24 @@
-import { Component, Output } from '@angular/core';
+import { Component, Output, OnInit } from '@angular/core';
 import { YandexTranslateService } from './services/yt.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
   langs = [];
-
+  
   constructor(private translator: YandexTranslateService){
-    this.translator.getLanguages().subscribe(res => {
-      this.langs = res.langs;
-    });
+    
+  }
+
+  ngOnInit(){
+    this.translator.getLanguages()
+      .subscribe(res =>
+      {
+        this.langs = res.langs;
+      });
   }
 
   @Output()

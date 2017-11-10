@@ -1,11 +1,11 @@
-import { Component, Output, OnInit } from '@angular/core';
+import { Component, Output, OnInit, OnChanges } from '@angular/core';
 import { YandexTranslateService } from './services/yt.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnChanges {
   title = 'app';
   langs = [];
   
@@ -13,7 +13,12 @@ export class AppComponent implements OnInit {
     
   }
 
-  ngOnInit(){
+  ngOnChanges(){
+    // this.updateLangs();
+  }
+
+  ngOnInit()
+  {
     this.translator.getLanguages()
       .subscribe(res =>
       {

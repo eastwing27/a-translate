@@ -10,18 +10,18 @@ export class DropdownComponent implements OnInit, OnChanges
     @Input() langs = [];
     @Input() forInput = false;
 
-    private _subscription;
+    private langsLoaded = false;
 
     constructor(private translate: YandexTranslateService){
     }
 
     ngOnInit(){
-        console.warn('langs', this.langs);
     }
-
+    
     ngOnChanges(changes: SimpleChanges)
     {
-
+        console.warn('langs', this.langs);
+        this.langsLoaded = !!changes.langs.currentValue;
     }
 
 }

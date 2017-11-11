@@ -1,20 +1,26 @@
-import { Component, Output, OnInit, OnChanges } from '@angular/core';
+import { Component, Output, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { YandexTranslateService } from './services/yt.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   title = 'app';
-  langs = [];
+  langs : {key: string; value: string}[] = [];
   
-  constructor(private translator: YandexTranslateService){
+  constructor(private translator: YandexTranslateService, private ref: ChangeDetectorRef){
     
   }
 
-  ngOnChanges(){
-    // this.updateLangs();
+  private toArray(obj)
+  {
+    let result = [];
+    for (var prop in obj)
+    {
+      result.push({key: prop, value: obj[prop]});
+    }
+    return result;
   }
 
   ngOnInit()
@@ -22,8 +28,9 @@ export class AppComponent implements OnInit, OnChanges {
     this.translator.getLanguages()
       .subscribe(res =>
       {
-        this.langs = res.langs;
+        this.langs = this.toArray(res.langs);
       });
+      console.log(this.langs,this.toArray(this.langs));
   }
 
   @Output()

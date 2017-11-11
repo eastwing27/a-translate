@@ -4,7 +4,7 @@
         Language
         <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" *ngIf="langsLoaded">
         <div *ngIf="forInput">
             <li>
                 <a href="#">Detect automatically</a>

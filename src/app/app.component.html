@@ -4,14 +4,23 @@
   <form class="well">
     <div class="form-group">
       <div class="row">
-        <div class="col-md-4" align="bottom"><strong>Original text</strong></div>
+        <div class="col-md-4" align="bottom"><strong>Original text: {{originalLang.name}}</strong></div>
         <div class="col-md-2" align="right">
-          <dropdown [langs]="langs" [forInput]="true"></dropdown>
+          <dropdown 
+            [langs]="langs" 
+            [forInput]="true" 
+            [selectedLangId]="originalLang.id"
+            [setLanguage]="setOriginalLang.bind(this)">
+          </dropdown>
         </div>
         <div class="col-md-2" align="left">
-          <dropdown [langs]="langs"></dropdown>
+          <dropdown 
+            [langs]="langs" 
+            [selectedLangId]="translationLang.id"
+            [setLanguage]="setTranslationLang.bind(this)">
+          </dropdown>
         </div>
-        <div class="col-md-4" align="bottom"><strong>Translation</strong></div>
+        <div class="col-md-4" align="bottom"><strong>Translation: {{translationLang.name}}</strong></div>
       </div>
       <br>
       <div class="row">

@@ -8,11 +8,12 @@ import { YandexTranslateService } from './services/yt.service';
 export class AppComponent implements OnInit {
   title = 'app';
   langs : {key: string; value: string}[] = [];
+  originalLang: {id: string, name: string};
+  translationLang: { id: string, name: string };
   
   constructor(private translator: YandexTranslateService, private ref: ChangeDetectorRef){
     
   }
-
   private toArray(obj)
   {
     let result = [];
@@ -25,19 +26,47 @@ export class AppComponent implements OnInit {
 
   ngOnInit()
   {
+    this.originalLang = { id: null, name: 'Autodetect' };
+    this.translationLang = { id: 'ru', name: 'Russian' };
+
     this.translator.getLanguages()
       .subscribe(res =>
       {
         this.langs = this.toArray(res.langs);
       });
-      console.log(this.langs,this.toArray(this.langs));
   }
 
   @Output()
   translate(text: string){
-    //console.log(text);
     let box = document.getElementById("output-box");
-    //console.info(box.textContent, box.innerText);
-    this.translator.getTranslation(text).subscribe(res => box.setAttribute('placeholder',res.text));
+
+    if (!text){
+      box.setAttribute('placeholder', 'Translation appears here');
+      return;
+    }
+
+    let lang = `${this.originalLang.id ? this.originalLang.id + '-' : ''}${this.translationLang.id}`;
+    this.translator.getTranslation(text, lang).subscribe(res => {
+      let translation = res.text;
+      if (!this.originalLang.id){
+        let id = res.lang.split('-')[0];
+        let lang = this.langs.find(item => item.key == id).value;
+        translation = `From autodected ${lang}: ${translation}`
+      }
+      box.setAttribute('placeholder', translation);
+    });
   }
+
+  @Output()
+  setOriginalLang(new_id: string, new_name: string)
+  {
+    this.originalLang = { id: new_id, name: new_name };
+  }
+
+  @Output()
+  setTranslationLang(new_id: string, new_name: string)
+  {
+    this.translationLang = { id: new_id, name: new_name };
+  }
+
 }

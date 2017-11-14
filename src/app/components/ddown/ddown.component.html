@@ -4,15 +4,22 @@
         Language
         <span class="caret"></span>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" *ngIf="langsLoaded">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="height:400px; overflow:auto; padding-left:5%" *ngIf="langsLoaded"> 
         <div *ngIf="forInput">
             <li>
-                <a href="#">Detect automatically</a>
+                <a href="#" 
+                (click)="this.setLanguage(null,'Autodetect')" 
+                class="{{!!this.selectedLangId ? 'link-dropdown' : 'link-dropdown-selected'}}">
+                Detect automatically</a>
             </li>
+            <li role="separator" class="divider"></li>
         </div>
         <div *ngFor="let lang of langs">
             <li>
-                <a href="#">{{lang.value}}</a>
+                <a href="#" 
+                (click)="this.setLanguage(lang.key,lang.value)" 
+                class="{{this.selectedLangId != lang.key ? 'link-dropdown' : 'link-dropdown-selected'}}">
+                {{lang.value}}</a>
             </li>
         </div>
     </ul>

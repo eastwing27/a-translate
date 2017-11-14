@@ -26,10 +26,10 @@ export class YandexTranslateService{
         return res;
     }
 
-    getTranslation(text: string){
+    getTranslation(text: string, lang: string){
         var options = [];
-        options.push({key: "text", value: text});
-        options.push({key: "lang", value: "ru"});
+        options.push({ key: "text", value: text });
+        options.push({ key: "lang", value: lang });
 
         let url = this.makeUrl('translate', options);
 

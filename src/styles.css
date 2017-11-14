@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+.link-dropdown{
+    display:inline-block;
+    text-decoration: none;
+    text-align: center;
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    display: inline-block;
+}
+
+a:hover.link-dropdown{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(19, 9, 107);
+}
+
+.link-dropdown-selected{
+    display:inline-block;
+    text-decoration: none;
+    text-align: center;
+    background-color: rgb(22, 100, 218);;
+    color: black;
+    text-align: center;
+    display: inline-block;
+}
+
+a:hover.link-dropdown-selected{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(19, 9, 107);
+}

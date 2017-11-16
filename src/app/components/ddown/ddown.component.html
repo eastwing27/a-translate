@@ -9,7 +9,7 @@
             <li>
                 <a href="#" 
                 (click)="this.setLanguage(null,'Autodetect')" 
-                class="{{!!this.selectedLangId ? 'link-dropdown' : 'link-dropdown-selected'}}">
+                >
                 Detect automatically</a>
             </li>
             <li role="separator" class="divider"></li>
@@ -18,7 +18,7 @@
             <li>
                 <a href="#" 
                 (click)="this.setLanguage(lang.key,lang.value)" 
-                class="{{this.selectedLangId != lang.key ? 'link-dropdown' : 'link-dropdown-selected'}}">
+                >
                 {{lang.value}}</a>
             </li>
         </div>
